@@ -73,12 +73,42 @@ h1 {
     height: 40px;
 }
 
+ul li {
+    position: relative;
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    color: #fff;
+}
+
 .tasks-container p {
     color: var(--secondary-color);
+}
+.tasks-container button {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.tasks-container button:hover {
+    background: rgba(228, 111, 111, 0.9);
 }
 
 .empty-list {
     margin: 75px 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
