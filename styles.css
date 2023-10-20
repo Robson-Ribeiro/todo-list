@@ -1,0 +1,92 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: #1ca5f593;
+    --secondary-color: #eee;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(./img/wallpaper.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-container {
+    width: 450px;
+    height: 550px;
+    padding: 30px 35px;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+h1 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.create-task {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.task-input {
+    flex: 1;
+    outline: none;
+    padding: 10px 10px 10px 20px;
+    background-color: transparent;
+    border: 2px solid var(--main-color);
+    border-radius: 30px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.task-input::placeholder {
+    color: #bfbfbf;
+}
+
+.add-button {
+    border: none;
+    outline: none;
+    background: var(--main-color);
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 40px;
+    width: 100px;
+    height: 40px;
+}
+
+.tasks-container p {
+    color: var(--secondary-color);
+}
+
+.empty-list {
+    margin: 75px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.empty-list img {
+    height: 84px;
+    width: 84px;
+}
