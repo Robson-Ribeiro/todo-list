@@ -1,25 +1,29 @@
 const input = document.querySelector('.task-input');
 const button = document.querySelector('.add-button');
-const tasksList = document.querySelector('.tasks-list');
+let tasksList = document.querySelector('.tasks-list');
 const emptyListDefault = document.querySelector('.empty-list');
+
+tasksList.innerHTML = localStorage.getItem('tasks');
+
+emptyListController();
 
 button.addEventListener('click', (e) => {
     addTask();
+    saveTasks();
 });
 
 input.addEventListener('keypress', (e) => {
     if(e.key === 'Enter') {
         addTask();
+        saveTasks();
     }
 });
 
 tasksList.addEventListener("click", (e) => {
     if(e.target.tagName === "BUTTON") {
         e.target.parentElement.remove();
-        let tasks = tasksList.querySelectorAll('li');
-        if(!tasks.length) {
-            emptyListDefault.style.display = "flex";
-        }
+        saveTasks();
+        emptyListController();
     } else if (e.target.tagName === "P") {
         let checkbox = e.target.previousElementSibling;
         if(checkbox.checked) {
@@ -36,7 +40,6 @@ tasksList.addEventListener("click", (e) => {
         }
     }
 });
-
 
 const addTask = () => {
     if(input.value) {
@@ -61,8 +64,23 @@ const addTask = () => {
     } else {
         return window.alert('You need to write the task before creating it!');
     }
+    emptyListController();
+}
+
+const saveTasks = () => {
+    let tasks = document.querySelectorAll('li');
+    let tasksHTML = document.createElement('div');
+    tasks.forEach(function (task) {
+        tasksHTML.innerHTML += task.outerHTML;
+    });
+    localStorage.setItem("tasks", tasksHTML.innerHTML);
+}
+
+function emptyListController () {
     let tasks = tasksList.querySelectorAll('li');
-    if(tasks) {
+    if(tasks.length > 0) {
         emptyListDefault.style.display = "none";
+    } else {
+        emptyListDefault.style.display = "flex";
     }
 }
