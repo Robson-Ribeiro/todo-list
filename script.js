@@ -2,6 +2,8 @@ const input = document.querySelector('.task-input');
 const button = document.querySelector('.add-button');
 let tasksList = document.querySelector('.tasks-list');
 const emptyListDefault = document.querySelector('.empty-list');
+const deleteAll = document.querySelector('.delete-all');
+
 
 tasksList.innerHTML = localStorage.getItem('tasks');
 
@@ -40,6 +42,14 @@ tasksList.addEventListener("click", (e) => {
         }
     }
 });
+
+deleteAll.addEventListener("click", () => {
+    tasksList.innerHTML = '';
+    saveTasks();
+    emptyListController();
+});
+
+
 
 const addTask = () => {
     if(input.value) {
