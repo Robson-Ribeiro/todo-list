@@ -25,7 +25,10 @@ body {
 
 .main-container {
     width: 450px;
-    height: 550px;
+    min-height: 550px;
+    max-height: 900px;
+    height: auto;
+    overflow-y: auto;
     padding: 30px 35px;
     background: transparent;
     border: 2px solid var(--main-color);
@@ -166,4 +169,69 @@ input[type="checkbox"]:checked::before {
 
 li:has(> .task-checkbox:checked) {
     text-decoration: line-through;
+}
+
+.utils {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.border {
+    width: 0px;
+    border: 1px solid #eeeeee73;
+}
+
+.filter {
+    display: block;
+    height: 60px;
+    padding: 1.1rem 0.7rem 1rem 0.7rem;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    position: relative;
+    cursor: pointer;
+}
+
+.delete-all {
+    display: block;
+    height: 60px;
+    padding: 1.1rem 0.7rem 1rem 0.7rem;
+    font-size: 1.1rem;
+    color: black;
+    color: var(--secondary-color);
+    position: relative;
+    cursor: pointer;
+}
+
+.filter::after {
+    content: '';
+    position: absolute;
+    bottom: 0.8rem;
+    left: 50%;
+    width: 0;
+    height: 0.2rem;
+    background: rgb(4, 255, 4); 
+    transition: all 300ms ease-in-out;
+}
+
+.filter:hover::after {
+    width: 50%;
+    left: 25%;
+}
+
+.delete-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0.8rem;
+    left: 50%;
+    width: 0;
+    height: 0.2rem;
+    background: crimson; 
+    transition: all 300ms ease-in-out;
+}
+
+.delete-all:hover::after {
+    width: 50%;
+    left: 25%;
 }
