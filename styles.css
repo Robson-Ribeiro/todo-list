@@ -90,6 +90,7 @@ ul li {
 
 .tasks-container p {
     color: var(--secondary-color);
+    text-decoration: none;
 }
 
 .task-text {
@@ -163,13 +164,13 @@ input[type="checkbox"]::before {
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
-input[type="checkbox"]:checked::before {
-    transform: scale(1);
-}
-
-li:has(> .task-checkbox:checked) {
+.checked {
     text-decoration: line-through;
 }
+
+.checked input::before {
+    transform: scale(1);
+ }
 
 .utils {
     display: flex;
@@ -234,4 +235,10 @@ li:has(> .task-checkbox:checked) {
 .delete-all:hover::after {
     width: 50%;
     left: 25%;
+}
+
+.noTasks {
+    color: #eee;
+    margin: 40px auto 10px;
+    font-size: 20px;
 }
