@@ -26,8 +26,11 @@ input.addEventListener('keypress', (e) => {
 
 tasksList.addEventListener("click", (e) => {
     if(e.target.tagName === "BUTTON") {
+        localStorageRemoveLI(e.target.parentElement);
         e.target.parentElement.remove();
         emptyListController();
+        saveTasks();
+        return;
     } else if (e.target.tagName === "P") {
         e.target.parentElement.classList.toggle('checked');
         let checkbox = e.target.previousElementSibling;
@@ -43,6 +46,7 @@ tasksList.addEventListener("click", (e) => {
     } else if (e.target.tagName === 'INPUT') {
         e.target.parentElement.classList.toggle('checked');
     }
+    
     saveTasks();
 });
 
@@ -108,7 +112,7 @@ utils.addEventListener("click", (e) => {
         emptyListController();
     } else if(e.target.classList.value === "delete-all") {
         tasksList.innerHTML = '';
-        saveTasks();
+        localStorage.clear();
     }
 
     emptyListController();
@@ -150,6 +154,23 @@ const addTask = () => {
 const saveTasks = () => {
     let tasks = tasksList.querySelectorAll('li');
     let tasksHTML = document.createElement('div');
+
+    let persist = document.createElement('div');
+    persist.innerHTML = localStorage.getItem('tasks');
+    persist = persist.querySelectorAll('li');
+
+    tasks = Array.from(tasks);
+    persist = Array.from(persist);
+    if(persist) {
+        tasks.forEach((task) => {
+            persist.forEach((data, i) => {
+                if(task.innerText.replace('\n\n', '') === data.innerText) {
+                    persist.splice(i, 1);
+                }
+            })
+        });
+        tasks = [...tasks].concat([...persist]);
+    }
     tasks.forEach(function (task) {
         tasksHTML.innerHTML += task.outerHTML;
     });
@@ -163,4 +184,26 @@ function emptyListController () {
     } else {
         emptyListDefault.style.display = "flex";
     }
+}
+
+const localStorageRemoveLI = (element) => {
+    let local = document.createElement('div');
+    local.innerHTML = localStorage.getItem('tasks');
+    local = local.querySelectorAll('li');
+    local = Array.from(local);
+    
+    if(!local) return;
+
+    local.forEach((task, i) => {
+        if(task.innerText === element.innerText.replace('\n\n', '')) {
+            local.splice(i, 1);
+        }
+    });
+
+    let tasksHTML = document.createElement('div');
+
+    local.forEach(function (task) {
+        tasksHTML.innerHTML += task.outerHTML;
+    });
+    localStorage.setItem("tasks", tasksHTML.innerHTML);
 }
