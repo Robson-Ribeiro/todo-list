@@ -242,3 +242,8 @@ input[type="checkbox"]::before {
     margin: 40px auto 10px;
     font-size: 20px;
 }
+
+.filter-selected::after {
+    width: 50%;
+    left: 25%;
+}

@@ -55,11 +55,14 @@ utils.addEventListener("click", (e) => {
     let tasks;
 
     if(e.target.classList[0] === "complete") {
+        if(filter === 2) document.querySelector('.incomplete').classList.toggle('filter-selected');
+        e.target.classList.toggle('filter-selected');
         if(filter !== 1) {
             filter = 1;
         } else {
             tasksList.innerHTML = localStorage.getItem('tasks');
             filter = 0;
+            emptyListController();
             return;
         }
         removeMsg();
@@ -81,11 +84,14 @@ utils.addEventListener("click", (e) => {
         });
         emptyListController();
     } else if(e.target.classList[0] === "incomplete") {
+        if(filter === 1) document.querySelector('.complete').classList.toggle('filter-selected');
+        e.target.classList.toggle('filter-selected');
         if(filter !== 2) {
             filter = 2;
         } else {
             tasksList.innerHTML = localStorage.getItem('tasks');
             filter = 0;
+            emptyListController();
             return;
         }
         removeMsg();
